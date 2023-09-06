@@ -28,12 +28,6 @@ for node in mt_graph.nodes:
     for election in elections:
         mt_graph.nodes[node][election] = mt_data[mt_data['GEOCODE'] == geo_id][election].iloc[0]
     
-    if mt_assign[mt_assign['GEOID20'] == geo_id].empty:
-        print(node, geo_id)
-    else:
-        mt_graph.nodes[node]['HOUSE'] = mt_assign[mt_assign['GEOID20'] == geo_id]['HOUSE'].iloc[0]
-        mt_graph.nodes[node]['SENATE'] = mt_assign[mt_assign['GEOID20'] == geo_id]['SENATE'].iloc[0]
-
 
 # Set variables 
 election_names = ["PRES20", "SEN20", "GOV20", "SEN18"] 
@@ -45,12 +39,12 @@ election_columns = [['G20PREDBID', 'G20PRERTRU'],
                     ['G20GOVDCOO', 'G20GOVRGIA'], 
                     ['G18USSDTES', 'G18USSRROS']]
 
+# will likley need to change this for the 100 and 50 zone plans
 pop_tol = 0.05
 pop_col = "TOTPOP20"
 steps = 100
 INTERVAL = 10
 
-#Iterate through this
 
 total_population = mt_data[pop_col].sum()
 print(total_population)
@@ -71,7 +65,7 @@ elections = [
 election_updaters = {election.name: election for election in elections}
 myupdaters.update(election_updaters)
 
-
+# can also try recursive_tree_part but i've had more luck with this function
 first = recursive_seed_part(mt_graph, range(num_districts), total_population/num_districts, pop_col, pop_tol) 
 
 initial_partition = Partition(mt_graph, first, myupdaters)
