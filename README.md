@@ -3,7 +3,7 @@ Replication code and data for MGGG's study on alternative electoral systems in M
 
 This project relies on `poetry` to manage depdenecies. After cloning the repository run `poetry install` to load in the required packages. Then run `poetry shell` to create a virtual environment to run scripts from or run `poetry run python <script_name>`. 
 
-# Data Cleaning and Generation
+## Data Cleaning and Generation
 Code to generate ensembles of districting plans used in this report can be found in `process/gen_ensembles.py`. To generate plans run:
 
 ```console 
