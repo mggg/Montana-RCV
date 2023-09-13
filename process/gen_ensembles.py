@@ -17,7 +17,6 @@ elif len(sys.argv) < 2:
     raise ValueError('Must input number of desired districts (e.g 8, 10, 32, 40)')
 
 mt_data = pd.read_csv('data/election/mt_vtd_elex.csv')
-mt_assign = gpd.read_file('data/election/MontanaVotingPrecincts_shp')
 mt_graph = Graph.from_json('data/election/mt_vtd_connected.json')
 
 
@@ -42,7 +41,7 @@ election_columns = [['G20PREDBID', 'G20PRERTRU'],
 # will likley need to change this for the 100 and 50 zone plans
 pop_tol = 0.05
 pop_col = "TOTPOP20"
-steps = 100
+steps = 1000
 INTERVAL = 10
 
 
